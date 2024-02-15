@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 
 # Create your views here.
@@ -10,26 +10,34 @@ from django.http import HttpResponse, HttpResponseNotFound
 # def march(request):
 #     return HttpResponse("this challenge is created for March via  Ali Sarmei.")
 
+monthly_challenges = {
+    "january": "challenge for JAN",
+    "february": "challenge for FEB",
+    "march": "challenge for MAR",
+    "april": "challenge for APR",
+    "may": "challenge for MAY",
+    "jun": "challenge for JUN",
+    "july": "challenge for JULY",
+    "august": "challenge for AUG",
+    "september": "challenge for SEP",
+    "october": "challenge for OCT",
+    "november": "challenge for NOV",
+    "december": "challenge for DEC",
+}
+
 
 def monthly_challenge(request, month):
-    challenge_text = None
-    if month == "february":
-        challenge_text = "Feb Challenge"
-    elif month == "march":
-        challenge_text = "March Challenge"
-    else:
-        return HttpResponse("<h1>Invalid Month</h1><p>Please enter a valid month.</p>")
-    return HttpResponse(challenge_text)
+    try:
+        challenge_text = monthly_challenges[month]
+        return HttpResponse(challenge_text)
+    except:
+        return HttpResponseNotFound("This month is not a valid month!")
 
 
 def monthly_number_challenge(request, month):
-    challenge_text = None
-    if month == 2:
-        challenge_text = " February challenge"
-    elif month == 3:
-        challenge_text = "March Challenge"
-    else:
-        return HttpResponseNotFound(
-            "The month you input doesn't have any challenges yet"
-        )
-    return HttpResponse(challenge_text)
+    # make sure to use the data as list instead of the object
+    months = list(monthly_challenges.keys())
+    if month > len(months):
+        return HttpResponseNotFound("Invalid month")
+    redirect_month = months[month - 1]
+    return HttpResponseRedirect("/challenges/" + redirect_month)
