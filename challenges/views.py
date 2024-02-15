@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
@@ -19,4 +19,17 @@ def monthly_challenge(request, month):
         challenge_text = "March Challenge"
     else:
         return HttpResponse("<h1>Invalid Month</h1><p>Please enter a valid month.</p>")
+    return HttpResponse(challenge_text)
+
+
+def monthly_number_challenge(request, month):
+    challenge_text = None
+    if month == 2:
+        challenge_text = " February challenge"
+    elif month == 3:
+        challenge_text = "March Challenge"
+    else:
+        return HttpResponseNotFound(
+            "The month you input doesn't have any challenges yet"
+        )
     return HttpResponse(challenge_text)
