@@ -4,12 +4,6 @@ from django.urls import reverse
 
 
 # Create your views here.
-# def february(request):
-#     return HttpResponse("this challenge is created for Feb via Ali Sarmei!")
-
-
-# def march(request):
-#     return HttpResponse("this challenge is created for March via  Ali Sarmei.")
 
 monthly_challenges = {
     "january": "challenge for JAN",
@@ -27,12 +21,23 @@ monthly_challenges = {
 }
 
 
+def index(request):
+    list_items = ""
+    months = list(monthly_challenges.keys())
+    for month in months:
+        capitalized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f'<li><a href="{month_path}">{capitalized_month}</a></li>'
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return HttpResponse(challenge_text)
+        return HttpResponse(f"<h1>{challenge_text}</h1>")
     except:
-        return HttpResponseNotFound("This month is not a valid month!")
+        return HttpResponseNotFound("<h1>This month is not a valid month!</h1>")
 
 
 def monthly_number_challenge(request, month):
