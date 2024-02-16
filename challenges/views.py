@@ -38,7 +38,16 @@ def monthly_challenge(request, month):
     try:
         # response_data = render_to_string("challenges/challenge.html")
         # return HttpResponse(response_data)
-        return render(request, "challenges/challenge.html")
+        challenge_text = monthly_challenges[month]
+        return render(
+            request,
+            "challenges/challenge.html",
+            {
+                "text": challenge_text,
+                # "title": "Ali Saremi",
+                "month_name": month.capitalize(),
+            },
+        )
     except:
         return HttpResponseNotFound("<h1>This month is not a valid month!</h1>")
 
