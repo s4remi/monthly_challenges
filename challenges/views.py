@@ -45,7 +45,8 @@ def monthly_challenge(request, month):
             {
                 "text": challenge_text,
                 # "title": "Ali Saremi",
-                "month_name": month.capitalize(),
+                # it is a best practice to leave all html modification in the html file &using tags
+                "month_name": month,
             },
         )
     except:
