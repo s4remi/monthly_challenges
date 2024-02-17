@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block page-title %}
+{% block css_files %} 
+    <link rel="stylesheet" href="{% static "challenges/challenges.css" %} " >
+{%endblock%}
+
+{% block page_title %}
 All challenges
 {% endblock  %}
        
