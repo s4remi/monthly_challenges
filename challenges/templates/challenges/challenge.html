@@ -1,9 +1,11 @@
-{% extends "base.html" %} {% block page_title %} {{month_name|title}} challenge
-{% endblock page_title %} {% block content %}
-<h1>{{month_name|title}} challenge</h1>
-{%if text is not none%}
+{% extends "base.html" %} {% block page_title %} {{ month_name|title }}challenge
+{% endblock %} {% block content %} {%include "challenges/includes/header.html"%}
+
+<h1>{{ month_name|title }} challenge</h1>
+
+{% if text is not none %}
 <h2>SQL leetcodes for each module</h2>
-<h3>{{text|title}}</h3>
-{%else%}
+<h3>{{ text|title }}</h3>
+{% else %}
 <p>This project started in Feb 2024, therefore, no challenges for this month</p>
 {% endif %} {% endblock %}
