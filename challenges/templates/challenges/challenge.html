@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>Monthly Challange</title> -->
-    <title>{{month_name|title}} challenge</title>
-  </head>
-  <body>
-    <h1>{{month_name|title}} challenge</h1>
-    {%if text is not none%}
-    <h2>SQL leetcodes for each module</h2>
-    <h3>{{text|title}}</h3>
-    {%else%}
-    <p>
-      This project started in Feb 2024, therefore, no challenges for this month
-    </p>
-    {% endif %}
-  </body>
-</html>
+{% extends "base.html" %} {% block page_title %} {{month_name|title}} challenge
+{% endblock page_title %} {% block content %}
+<h1>{{month_name|title}} challenge</h1>
+{%if text is not none%}
+<h2>SQL leetcodes for each module</h2>
+<h3>{{text|title}}</h3>
+{%else%}
+<p>This project started in Feb 2024, therefore, no challenges for this month</p>
+{% endif %} {% endblock %}
