@@ -1,11 +1,14 @@
-{% extends "base.html" %} {% block page_title %} {{ month_name|title }}challenge
-{% endblock %} {% block content %} {%include "challenges/includes/header.html"%}
-
-<h1>{{ month_name|title }} challenge</h1>
-
+{% extends "base.html" %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'challenges/challenge.css' %}" />
+<link rel="stylesheet" href="{% static 'challenges/includes/header.css' %}" />
+{% endblock %} {% block page_title %} {{ month_name|title }} Challenge
+{%endblock%} {% block content %} {% include "challenges/includes/header.html" %}
+<h1>{{ month_name|title }} Challenge</h1>
 {% if text is not none %}
-<h2>SQL leetcodes for each module</h2>
+<h2>SQL Leetcodes for Each Module</h2>
 <h3>{{ text|title }}</h3>
 {% else %}
-<p>This project started in Feb 2024, therefore, no challenges for this month</p>
+<p class="fallback">
+  This project started in Feb 2024, therefore, no challenges for this month
+</p>
 {% endif %} {% endblock %}
